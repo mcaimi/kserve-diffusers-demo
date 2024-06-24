@@ -1,0 +1,10 @@
+torch
+torchvision
+transformers
+accelerate
+#xformers
+kserve
+bitsandbytes
+ftfy
+diffusers
+pillow
