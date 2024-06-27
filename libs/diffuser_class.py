@@ -88,6 +88,12 @@ class DiffusersModel(Model):
                 {
                     "model_name": self.model_id,
                     "prompt": payload["prompt"],
+                    "negative_prompt": payload.get("negative_prompt", ""),
+                    "num_inference_steps": payload.get("num_inference_steps"),
+                    "width": payload.get("width", "unspecified"),
+                    "height": payload.get("height", "unspecified"),
+                    "guidance_scale": payload.get("guidance_scale", "unspecified"),
+                    "seed": payload.get("seed", "-1"),
                     "image": {
                         "format": "PNG",
                         "b64": im_b64
