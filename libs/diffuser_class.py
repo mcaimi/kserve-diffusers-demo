@@ -9,7 +9,7 @@ from typing import Dict, Union
 # import libraries
 try:
     import random
-    from torch import Generator, float16
+    from torch import Generator
     from kserve import Model, InferRequest, InferResponse
     from kserve.errors import InvalidInput
     from diffusers import DiffusionPipeline, StableDiffusionPipeline
@@ -92,7 +92,7 @@ class DiffusersModel(Model):
                 payload["generator"] = Generator(self.device).manual_seed(payload.get("seed"))
 
             # Setup Scheduler
-            print(f"Generating with Noise Scheduler {payload.get("scheduler")}")
+            print(f"Generating with Noise Scheduler {payload.get('scheduler')}")
             self.pipeline.scheduler = schedulers.get(payload.get("scheduler")).from_config(self.pipeline.scheduler.config)
             # generate image
             image = self.pipeline(**payload).images[0]
