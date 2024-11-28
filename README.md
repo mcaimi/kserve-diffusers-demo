@@ -14,7 +14,8 @@ The server expects a JSON-encoded payload to start inference:
      {
        "prompt": "photo of the beach",
        "negative_prompt": "ugly, deformed, bad anatomy",
-       "num_inference_steps": 60
+       "num_inference_steps": 20,
+       "scheduler": "DPM++ SDE",
      }
    ]
  }
@@ -28,4 +29,5 @@ The server expects a JSON-encoded payload to start inference:
 - "width" and "height": size of the generated image
 - "guidance_scale": the guidance scale value to feed to the neural network
 - "seed": if specified, use this value as the generation seed.
+- "scheduler": Noise Scheduler to use during generation (DPM++ 2M, DPM++ SDE, Euler and Euler a, Heun and LMS)
 
