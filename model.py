@@ -3,7 +3,7 @@
 # import base libraries
 import argparse
 
-# import pyrotch and diffusers libraries
+# import custom diffuser class
 # also import kserve libraries
 try:
     from libs.diffuser_class import DiffusersModel
@@ -22,4 +22,7 @@ if __name__ == "__main__":
     # load model from disk
     model.load()
     # start serving loop
-    ModelServer().start([model])
+    try:
+        ModelServer().start([model])
+    except Exception:
+        print("Quitting...")
