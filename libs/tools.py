@@ -2,6 +2,7 @@
 
 try:
     import torch.cuda as tc
+    import torch.backends.mps as apple_mps
     from torch import float16, float32
     from diffusers.schedulers import (DPMSolverMultistepScheduler,
                                       DPMSolverSinglestepScheduler,
@@ -26,6 +27,7 @@ schedulers = {"DPM++ 2M": DPMSolverMultistepScheduler,
               "Heun": HeunDiscreteScheduler,
               "LMS": LMSDiscreteScheduler}
 
+
 # check for the presence of a gpu
 def get_accelerator_device():
     # assume no gpu is present
@@ -34,7 +36,11 @@ def get_accelerator_device():
 
     # test the presence of a GPU...
     print("Checking for the availability of a GPU...")
-    if tc.is_available():
+    if apple_mps.is_available():
+        print("Apple Metal Performance Shaders Available")
+        accelerator = "mps"
+        dtype = float16
+    elif tc.is_available():
         device_name = tc.get_device_name()
         device_capabilities = tc.get_device_capability()
         device_available_mem, device_total_mem = [x / 1024**3 for x in tc.mem_get_info()]
